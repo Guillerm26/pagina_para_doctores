@@ -1,8 +1,8 @@
 ﻿const DOCTORA = {
   nombre: "Dra. Olga Cruz",
   // Cambia por el número real: con 57 al inicio, sin espacios ni signos
-  whatsapp: "573000000000",
-  telefono: "+57 300 000 0000",
+  whatsapp: "573162911436",
+  telefono: "316 291 1436",
 };
 
 const SERVICIOS = [
@@ -209,5 +209,6 @@ export default function Home() {
     </div>
   );
 }
+
 
 
