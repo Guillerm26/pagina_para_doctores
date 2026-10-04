@@ -1,194 +1,213 @@
-// TODO: confirmar con el doctor todos estos datos antes de publicar.
-const CLINICA = {
-  doctor: "Dr. Edward Polanía",
-  especialidad: "Cirugía de nariz y cirugía facial", // confirmar título exacto con el doctor
-  whatsapp: "573000000000", // número con indicativo, sin + ni espacios
-  telefonoVisible: "+57 300 000 0000",
-  direccion: "Av. La Toma #8-60, Neiva, Huila",
-  horario: "Lunes a viernes, con cita previa", // confirmar
-  instagram: "https://www.instagram.com/dr_edwardpolania/",
+﻿const DOCTORA = {
+  nombre: "Dra. Olga Cruz",
+  // Cambia por el número real: con 57 al inicio, sin espacios ni signos
+  whatsapp: "573000000000",
+  telefono: "+57 300 000 0000",
 };
-
-const WA_LINK = `https://wa.me/${CLINICA.whatsapp}?text=${encodeURIComponent(
-  "Hola, quiero agendar una valoración con el Dr. Edward Polanía."
-)}`;
 
 const SERVICIOS = [
   {
-    nombre: "Rinoplastia",
-    desc: "Cirugía que remodela la nariz por estética, por función respiratoria o por ambas.",
+    icono: "👶",
+    titulo: "Exámenes auditivos neonatales",
+    texto:
+      "Exámenes para detectar a tiempo cualquier alteración auditiva en recién nacidos, de forma segura y cuidadosa.",
   },
   {
-    nombre: "Cirugía de senos nasales",
-    desc: "Tratamiento endoscópico de sinusitis crónica y obstrucciones, sin cortes externos.",
+    icono: "👂",
+    titulo: "Evaluación auditiva",
+    texto:
+      "Valoración de la audición para niños y adultos, con resultados claros y orientación para la familia.",
   },
   {
-    nombre: "Blefaroplastia",
-    desc: "Cirugía de los párpados para retirar el exceso de piel y las bolsas.",
-  },
-  {
-    nombre: "Otoplastia",
-    desc: "Corrección de la forma o la posición de las orejas.",
+    icono: "💬",
+    titulo: "Valoración fonoaudiológica",
+    texto:
+      "Evaluación de la comunicación, el lenguaje y la voz, con un plan de acompañamiento personalizado.",
   },
 ];
 
-const PASOS = [
+const PORQUE = [
   {
-    titulo: "Valoración",
-    desc: "El doctor examina, escucha lo que buscas y te explica qué es posible en tu caso.",
+    titulo: "Especialista en exámenes auditivos neonatales",
+    texto: "Experiencia dedicada al cuidado auditivo de los recién nacidos.",
   },
   {
-    titulo: "Plan quirúrgico",
-    desc: "Definen juntos la técnica, los tiempos, los costos y los cuidados previos.",
+    titulo: "Atención cercana",
+    texto: "Explicación clara de cada resultado y acompañamiento a las familias.",
   },
   {
-    titulo: "Cirugía",
-    desc: "Se realiza en una institución habilitada, con el equipo de anestesia y enfermería.",
+    titulo: "Presencia en Neiva y Garzón",
+    texto: "Atención para familias de todo el Huila en dos ciudades.",
   },
   {
-    titulo: "Controles",
-    desc: "Revisiones programadas hasta completar tu recuperación.",
+    titulo: "Reconocida en el Huila",
+    texto: "Respaldo y confianza de pacientes y familias de la región.",
   },
 ];
 
-function WhatsAppButton({ className = "" }: { className?: string }) {
-  return (
-    <a
-      href={WA_LINK}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`inline-block rounded-full bg-teal px-7 py-3.5 text-base font-semibold text-white transition-colors hover:bg-ink ${className}`}
-    >
-      Agendar por WhatsApp
-    </a>
-  );
-}
+const SEDES = [
+  { ciudad: "Neiva", direccion: "" },
+  { ciudad: "Garzón", direccion: "" },
+];
 
 export default function Home() {
+  const wa = `https://wa.me/${DOCTORA.whatsapp}?text=${encodeURIComponent(
+    "Hola Dra. Olga, quisiera agendar una cita."
+  )}`;
+
   return (
-    <div className="w-full">
-      {/* NAV */}
-      <header className="sticky top-0 z-10 flex items-center justify-between border-b border-ink/10 bg-paper/95 px-6 py-4 backdrop-blur sm:px-12">
-        <a href="#inicio" className="font-display text-xl font-semibold">
-          {CLINICA.doctor}
-        </a>
-        <nav className="hidden items-center gap-8 text-sm font-medium sm:flex">
-          <a href="#servicios">Servicios</a>
-          <a href="#doctor">El doctor</a>
-          <a href="#proceso">Cómo funciona</a>
-          <a href="#contacto">Contacto</a>
+    <div className="min-h-screen bg-white text-slate-800">
+      <header className="sticky top-0 z-50 border-b border-teal-100 bg-white/90 backdrop-blur">
+        <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+          <a href="#inicio" className="font-serif text-xl font-semibold text-teal-800">
+            {DOCTORA.nombre}
+          </a>
+          <div className="hidden gap-8 text-sm font-medium text-slate-600 md:flex">
+            <a href="#sobre-mi" className="hover:text-teal-700">Sobre mí</a>
+            <a href="#servicios" className="hover:text-teal-700">Servicios</a>
+            <a href="#sedes" className="hover:text-teal-700">Sedes</a>
+            <a href="#contacto" className="hover:text-teal-700">Contacto</a>
+          </div>
+          <a
+            href={wa}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-full bg-teal-700 px-5 py-2 text-sm font-semibold text-white transition hover:bg-teal-800"
+          >
+            Agendar cita
+          </a>
         </nav>
       </header>
 
-      {/* HERO */}
-      <section
-        id="inicio"
-        className="grid gap-12 px-6 py-20 sm:px-12 sm:py-28 lg:grid-cols-[1.3fr_1fr] lg:items-center"
-      >
-        <div>
-          <p className="mb-6 text-base text-teal">{CLINICA.especialidad} en Neiva</p>
-          <h1 className="font-display text-6xl font-bold leading-[0.95] sm:text-8xl">
-            Edward
-            <br />
-            Polanía
-          </h1>
-          <p className="mt-8 max-w-md text-lg leading-relaxed text-ink/80">
-            Cirugía de nariz y de rostro con una valoración clara: te explicamos qué
-            se puede lograr, cómo y con qué cuidados, antes de decidir.
-          </p>
-          <div className="mt-10 flex flex-wrap items-center gap-6">
-            <WhatsAppButton />
-            <a href="#servicios" className="text-sm font-semibold underline underline-offset-4">
-              Ver servicios
-            </a>
+      <main>
+        <section id="inicio" className="relative overflow-hidden bg-gradient-to-br from-teal-50 via-white to-sky-50">
+          <div className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-teal-200/40 blur-3xl" />
+          <div className="absolute -bottom-24 -left-24 h-80 w-80 rounded-full bg-sky-200/40 blur-3xl" />
+          <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 md:grid-cols-2 md:py-28">
+            <div>
+              <p className="mb-4 inline-block rounded-full bg-teal-100 px-4 py-1 text-sm font-semibold text-teal-800">
+                Fonoaudióloga · Neiva y Garzón, Huila
+              </p>
+              <h1 className="font-serif text-4xl font-semibold leading-tight text-slate-900 md:text-6xl">
+                Cuidamos la audición de tu bebé desde el primer día
+              </h1>
+              <p className="mt-6 text-lg leading-relaxed text-slate-600">
+                La Dra. Olga Cruz es especialista en exámenes para recién nacidos, con
+                experiencia y reconocimiento en Neiva y Garzón.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-4">
+                <a
+                  href={wa}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full bg-teal-700 px-8 py-3 font-semibold text-white shadow-lg shadow-teal-700/30 transition hover:bg-teal-800"
+                >
+                  Agendar por WhatsApp
+                </a>
+                <a
+                  href="#servicios"
+                  className="rounded-full border border-teal-700 px-8 py-3 font-semibold text-teal-800 transition hover:bg-teal-50"
+                >
+                  Ver servicios
+                </a>
+              </div>
+            </div>
+            <div className="rounded-3xl border border-teal-100 bg-white/80 p-8 shadow-xl backdrop-blur">
+              <p className="font-serif text-2xl font-semibold text-teal-800">
+                Atención con calidez y precisión
+              </p>
+              <ul className="mt-6 space-y-4 text-slate-700">
+                <li className="flex items-start gap-3"><span className="text-teal-600">✔</span>Exámenes para recién nacidos</li>
+                <li className="flex items-start gap-3"><span className="text-teal-600">✔</span>Resultados explicados con claridad</li>
+                <li className="flex items-start gap-3"><span className="text-teal-600">✔</span>Atención en Neiva y Garzón</li>
+                <li className="flex items-start gap-3"><span className="text-teal-600">✔</span>Reconocimiento en el Huila</li>
+              </ul>
+            </div>
           </div>
-        </div>
-        <div className="flex aspect-[4/5] items-center justify-center rounded-t-[999px] bg-mist">
-          <span className="px-6 text-center text-sm text-ink/50">
-            [FOTO PROFESIONAL DEL DOCTOR]
-          </span>
-        </div>
-      </section>
+        </section>
 
-      {/* SERVICIOS */}
-      <section id="servicios" className="bg-mist px-6 py-24 sm:px-12">
-        <h2 className="font-display text-4xl font-bold sm:text-5xl">Procedimientos</h2>
-        <ul className="mt-12 max-w-4xl">
-          {SERVICIOS.map((s) => (
-            <li
-              key={s.nombre}
-              className="grid gap-2 border-t border-ink/20 py-7 sm:grid-cols-[1fr_1.4fr] sm:gap-10"
-            >
-              <h3 className="font-display text-2xl font-semibold">{s.nombre}</h3>
-              <p className="leading-relaxed text-ink/80">{s.desc}</p>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      {/* EL DOCTOR */}
-      <section id="doctor" className="grid gap-12 px-6 py-24 sm:px-12 lg:grid-cols-2 lg:items-center">
-        <div className="flex aspect-[4/3] items-center justify-center bg-blush/60">
-          <span className="text-sm text-ink/50">[FOTO EN CONSULTORIO]</span>
-        </div>
-        <div>
-          <h2 className="font-display text-4xl font-bold sm:text-5xl">Sobre el doctor</h2>
-          <p className="mt-6 max-w-lg leading-[1.75] text-ink/80">
-            [Aquí va la reseña del Dr. Polanía: universidad, especialización, años de
-            experiencia y sociedades a las que pertenece. Se completa con los datos
-            que él confirme.]
+        <section id="sobre-mi" className="mx-auto max-w-4xl px-6 py-20 text-center">
+          <h2 className="font-serif text-3xl font-semibold text-slate-900 md:text-4xl">Sobre la Dra. Olga Cruz</h2>
+          <div className="mx-auto mt-4 h-1 w-16 rounded bg-teal-600" />
+          <p className="mt-8 text-lg leading-relaxed text-slate-600">
+            Fonoaudióloga especialista en exámenes auditivos neonatales. Su trabajo se centra en
+            cuidar la audición y la comunicación desde los primeros días de vida,
+            acompañando a las familias con cercanía y explicando cada resultado con claridad.
+            Cuenta con experiencia y reconocimiento en Neiva y en Garzón, Huila.
           </p>
-        </div>
-      </section>
+        </section>
 
-      {/* PROCESO */}
-      <section id="proceso" className="bg-ink px-6 py-24 text-white sm:px-12">
-        <h2 className="font-display text-4xl font-bold sm:text-5xl">Cómo funciona</h2>
-        <ol className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          {PASOS.map((p, i) => (
-            <li key={p.titulo} className="border-t border-white/30 pt-5">
-              <span className="font-display text-3xl text-blush">{i + 1}</span>
-              <h3 className="mt-3 text-lg font-semibold">{p.titulo}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-white/75">{p.desc}</p>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      {/* CONTACTO */}
-      <section id="contacto" className="px-6 py-24 sm:px-12">
-        <h2 className="font-display text-4xl font-bold sm:text-5xl">Agenda tu valoración</h2>
-        <div className="mt-10 grid gap-10 lg:grid-cols-2">
-          <address className="space-y-2 not-italic leading-relaxed">
-            <p className="font-semibold">Consultorio</p>
-            <p>{CLINICA.direccion}</p>
-            <p>{CLINICA.horario}</p>
-            <p>{CLINICA.telefonoVisible}</p>
-            <p>
-              <a
-                href={CLINICA.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline underline-offset-4"
-              >
-                @dr_edwardpolania en Instagram
-              </a>
-            </p>
-          </address>
-          <div>
-            <p className="mb-5 max-w-md leading-relaxed text-ink/80">
-              Escríbenos por WhatsApp y te confirmamos fecha y hora de la consulta.
-            </p>
-            <WhatsAppButton />
+        <section id="servicios" className="bg-teal-50/60 py-20">
+          <div className="mx-auto max-w-6xl px-6">
+            <h2 className="text-center font-serif text-3xl font-semibold text-slate-900 md:text-4xl">Servicios</h2>
+            <div className="mx-auto mt-4 h-1 w-16 rounded bg-teal-600" />
+            <div className="mt-12 grid gap-8 md:grid-cols-3">
+              {SERVICIOS.map((s) => (
+                <div key={s.titulo} className="rounded-2xl bg-white p-8 shadow-md transition hover:-translate-y-1 hover:shadow-xl">
+                  <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-teal-100 text-2xl">{s.icono}</div>
+                  <h3 className="font-serif text-xl font-semibold text-teal-800">{s.titulo}</h3>
+                  <p className="mt-3 leading-relaxed text-slate-600">{s.texto}</p>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* FOOTER */}
-      <footer className="border-t border-ink/10 px-6 py-8 text-xs text-ink/60 sm:px-12">
-        © 2026 {CLINICA.doctor}. Los resultados varían según cada paciente; toda
-        cirugía requiere una valoración médica previa.
+        <section className="mx-auto max-w-6xl px-6 py-20">
+          <h2 className="text-center font-serif text-3xl font-semibold text-slate-900 md:text-4xl">Experiencia y reconocimiento</h2>
+          <div className="mx-auto mt-4 h-1 w-16 rounded bg-teal-600" />
+          <div className="mt-12 grid gap-6 md:grid-cols-2">
+            {PORQUE.map((p) => (
+              <div key={p.titulo} className="flex gap-4 rounded-2xl border border-teal-100 p-6">
+                <div className="mt-1 h-3 w-3 shrink-0 rounded-full bg-teal-600" />
+                <div>
+                  <h3 className="font-semibold text-slate-900">{p.titulo}</h3>
+                  <p className="mt-1 text-slate-600">{p.texto}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section id="sedes" className="bg-gradient-to-br from-teal-700 to-teal-900 py-20 text-white">
+          <div className="mx-auto max-w-6xl px-6 text-center">
+            <h2 className="font-serif text-3xl font-semibold md:text-4xl">Dónde atendemos</h2>
+            <div className="mx-auto mt-4 h-1 w-16 rounded bg-teal-300" />
+            <div className="mt-12 grid gap-8 md:grid-cols-2">
+              {SEDES.map((s) => (
+                <div key={s.ciudad} className="rounded-2xl bg-white/10 p-8 backdrop-blur">
+                  <p className="font-serif text-3xl font-semibold">{s.ciudad}</p>
+                  <p className="mt-1 text-teal-100">Huila</p>
+                  {s.direccion && <p className="mt-3 text-teal-50">{s.direccion}</p>}
+                  <p className="mt-4 text-sm text-teal-100">Atención con cita previa</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="contacto" className="mx-auto max-w-3xl px-6 py-20 text-center">
+          <h2 className="font-serif text-3xl font-semibold text-slate-900 md:text-4xl">Agenda tu cita</h2>
+          <p className="mt-6 text-lg text-slate-600">
+            Escríbenos por WhatsApp y te ayudamos a programar el examen para tu bebé.
+          </p>
+          <a
+            href={wa}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-8 inline-block rounded-full bg-teal-700 px-10 py-4 text-lg font-semibold text-white shadow-lg shadow-teal-700/30 transition hover:bg-teal-800"
+          >
+            Escribir por WhatsApp
+          </a>
+          <p className="mt-4 text-slate-500">{DOCTORA.telefono}</p>
+        </section>
+      </main>
+
+      <footer className="border-t border-teal-100 bg-slate-50 py-8 text-center text-sm text-slate-500">
+        © {new Date().getFullYear()} {DOCTORA.nombre} · Fonoaudióloga · Neiva y Garzón, Huila
       </footer>
     </div>
   );
 }
+
+
